@@ -1,0 +1,46 @@
+create database cars;
+use cars;
+create table vehicles(
+title varchar(128),
+price integer,
+discount decimal(5,2)
+);
+
+insert into vehicles(title,price,discount) values
+("BMW", 70000, 0.03),
+("Audi", 65000, 0.02),
+("Mercedes", 72000, 0.01),
+("Ford", 35000, 0.09),
+("Honda", 43000, null),
+("Chrysler", 52000, 0.04),
+("Fiat", 20000, null),
+("Toyota", 35000, 0.04);
+
+select * from vehicles;
+
+select title,price from vehicles
+where title like "T%";
+
+select title,price from vehicles
+where price > 50000;
+
+select title,price,
+	CASE
+		WHEN price >= 70000
+			THEN "COOL"
+		WHEN price = 65000
+			THEN "GOOD"
+		WHEN price < 65000
+			THEN "FAIR"
+        END AS DescriptionStatus
+        FROM vehicles;
+        
+        
+select title, price, discount,
+	CASE
+		WHEN discount is null
+			THEN "Not count"
+        WHEN discount > 0 
+			THEN price*discount
+		END AS TotalCost
+        FROM vehicles;
